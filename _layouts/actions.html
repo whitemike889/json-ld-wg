@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSON-LD WG Meeting {{ page.date }}</title>
+    <title>Open Actions</title>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="JSON-LD Working Group" />
@@ -32,40 +32,16 @@
                 }
             }
         }
-        window.onload = cleanmd;
+        window.addEventListener('load',cleanmd);
     </script>
+    <script type="text/javascript" src="http://localhost:8001/LocalData/github/scribejs/ActionView/view.js"></script>
     <style media="screen">
-        .resolution {
-            color: red;
-        }
-        .action {
-            color: green;
-        }
-        .summary {
-            color:teal
-        }
-        .proposed_resolution {
-            color:slateblue
-        }
-        .draft_notice {
-            font-size: 1.3em;
-            text-align: center;
-            color: red;
-        }
-        nav.pagination {
-            border: none;
+        dt {
+            font-style: italic;
             font-weight: bold;
-            display: flex;
-            border-bottom: 1px solid #ccc;
         }
-        nav.pagination > * {
-            flex: 1;
-        }
-        nav.pagination time {
-            text-align: center;
-        }
-        nav.pagination a:last-child {
-            text-align: right;
+        dt:after {
+            content: ':'
         }
     </style>
 </head>
@@ -74,20 +50,10 @@
     <main>
         {% include nav.html %}
         <section id='content'>
-            <nav class="pagination">
-                {% if page.previous %}
-                <a rel="prev" href="{{ site.baseurl }}{{ page.previous.url }}">&laquo; {{ page.previous.date | date: "%Y-%m-%d" }}</a>
-                {% else %}
-                <a rel="up" href="../">&#9650;</a>
-                {% endif %}
-                <time>{{ page.date | date: "%Y-%m-%d" }}</time>
-                {% if page.next %}
-                <a rel="next" href="{{ site.baseurl }}{{ page.next.url }}">{{ page.next.date | date: "%Y-%m-%d" }} &raquo;</a>
-                {% else %}
-                <a rel="up" href="../">&#9650;</a>
-                {% endif %}
-            </nav>
             {{ content }}
+            <br>
+            <section id=actions data-actions='../assets/actions.json'>
+            </section>
         </section>
     </main>
     {% include footer.html %}
